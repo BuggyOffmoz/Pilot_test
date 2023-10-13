@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdvjyjxyep36n"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/AI_Test/RayCast2D.gd" id="1_7sw83"]
+[ext_resource type="Script" path="res://Scenes/Enemies/AI_Test/Collider.gd" id="1_uteww"]
+
+[node name="AI_Test" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(286, 293, 413, 332, 521, 266, 517, 132, 406, 55, 287, 80)
+script = ExtResource("1_uteww")
+
+[node name="Area2D" type="Area2D" parent="Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/Area2D"]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(217, 39)
+collide_with_areas = true
+script = ExtResource("1_7sw83")
