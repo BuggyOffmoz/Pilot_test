@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://gdw6rwnsnl2t"]
+
+[ext_resource type="Script" path="res://Singletons/Global.gd" id="1_lubq6"]
+[ext_resource type="Resource" uid="uid://53g6a1jih6iu" path="res://Resources/Settings.tres" id="2_dguyp"]
+[ext_resource type="Script" path="res://Singletons/SceneChanger.gd" id="2_efex2"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_lubq6")
+settings = ExtResource("2_dguyp")
+
+[node name="SceneChanger" type="CanvasLayer" parent="."]
+layer = 5
+script = ExtResource("2_efex2")
+
+[node name="ColorRect" type="ColorRect" parent="SceneChanger"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

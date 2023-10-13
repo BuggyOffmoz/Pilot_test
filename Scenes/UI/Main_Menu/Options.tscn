@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlxnao0qdybaq"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Main_Menu/Options.gd" id="1_th50d"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_th50d")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 3
+
+[node name="Music" type="Label" parent="CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="MusicValue" type="Label" parent="CenterContainer/GridContainer"]
+layout_mode = 2
+text = "% 100"
+horizontal_alignment = 1
+
+[node name="SFX" type="Label" parent="CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Sound FX"
+horizontal_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="SFXValue" type="Label" parent="CenterContainer/GridContainer"]
+layout_mode = 2
+text = "% 100"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.866
+anchor_top = 0.88
+anchor_right = 0.97
+anchor_bottom = 0.945
+offset_left = -0.720093
+offset_top = -0.400085
+offset_right = 0.599976
+offset_bottom = 0.399963
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+
+[connection signal="value_changed" from="CenterContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
