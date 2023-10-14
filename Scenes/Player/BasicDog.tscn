@@ -6,7 +6,7 @@
 script = ExtResource("1_xcfx3")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -14.0
+offset_top = -13.0
+offset_right = 14.0
+offset_bottom = 14.0

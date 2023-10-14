@@ -7,10 +7,11 @@ extends Node2D
 
 
 # CONSTANTS---------------------------------------------------------------------
-
+const MAX_OF_POINTS = 15
 
 # BOOLEANS----------------------------------------------------------------------
 var its_possible_to_draw = true
+var limit = false
 var is_draw = false
 var finish_draw = false
 
@@ -19,6 +20,7 @@ var distanceX
 var distanceY
 
 # ARRAYS------------------------------------------------------------------------
+var distance
 var points_of_directions_array: Array[Vector2]
 
 # VECTORS ----------------------------------------------------------------------
@@ -49,10 +51,12 @@ func _input(event):
 			finish_draw = true
 			share_position_array()
 			finish_draw = false
-	
+		
+		
 
 
 func _process(delta):
+	
 	if is_draw == true:
 		try_create_point()
 	elif is_draw == false:
@@ -63,20 +67,61 @@ func try_create_point():
 	var last_point_position = points_of_directions_array.size() - 1
 	var mouse_position = get_global_mouse_position()
 	if points_of_directions_array.is_empty():
-		points_of_directions_array.append(get_global_mouse_position())
+		points_of_directions_array.insert(0,get_global_mouse_position())
 		asign_first_point_line()
 	else:
-		distanceX = points_of_directions_array[last_point_position].x - mouse_position.x
-		distanceX = abs(distanceX)
-		distanceY = points_of_directions_array[last_point_position].y - mouse_position.y
-		distanceY = abs(distanceY)
+		distance = points_of_directions_array[last_point_position] - mouse_position
+#		distanceX = points_of_directions_array[last_point_position].x - mouse_position.x
+#		distanceX = abs(distanceX)
+#		distanceY = points_of_directions_array[last_point_position].y - mouse_position.y
+#		distanceY = abs(distanceY)
+		verify_amount_of_points()
 		verify_distance()
+		
 
 
+func verify_amount_of_points():
+	if points_of_directions_array.size() >= MAX_OF_POINTS:
+		limit = true
+	else:
+		pass
 
 func verify_distance():
-	if distanceX >= 15 or distanceY >= 15:
+	distance = fix_distance(distance)
+#	var mouse_velocity_fixed = fix_distance(Input.get_last_mouse_velocity())
+
+	
+#	if mouse_velocity_fixed.x >= 500 and limit == false:
+#		create_new_point(last_correct_mouse_position)
+#	elif mouse_velocity_fixed.x < 500 and limit == false:
+#		last_correct_mouse_position = get_global_mouse_position()
+	
+	
+#	if mouse_velocity_fixed.y >= 500 and limit == false:
+#		create_new_point(last_correct_mouse_position)
+#	elif mouse_velocity_fixed.y < 500 and limit == false:
+#		last_correct_mouse_position = get_global_mouse_position()
+	
+	if distance.x >= 15 and limit == false:
 		create_new_point()
+	elif distance.y >= 15 and limit == false:
+		create_new_point()
+
+
+func fix_distance(aux_vector: Vector2):
+	var fixed_distance: Vector2
+	fixed_distance = aux_vector
+	if aux_vector.x < 0:
+		fixed_distance.x *= -1
+	else:
+		pass
+	
+	if aux_vector.y < 0:
+		fixed_distance.y *= -1
+	else:
+		pass
+	
+	return(fixed_distance)
 
 
 func create_new_point():
@@ -87,19 +132,28 @@ func create_new_point():
 func asign_first_point_line():
 	var glogal_to = points_of_directions_array[0]
 	var local_position = $Line.to_local(glogal_to)
-	$Line.set_point_position(0,local_position)
+	$Line.add_point(local_position,0)
 	
 
 
 func create_new_line_point():
-	var last_point_position = points_of_directions_array.size() - 1
+	var last_point_position = (points_of_directions_array.size() - 1)
 	var glogal_to = points_of_directions_array[last_point_position]
 	var local_position = $Line.to_local(glogal_to)
 	$Line.add_point(local_position,last_point_position)
 
 
+func show_points():
+	for x in points_of_directions_array:
+		var new_point = $Panel.duplicate()
+		new_point.global_position = x
+		self.add_child(new_point)
+
+
 func share_position_array():
 	if finish_draw == true and is_draw == false:
+		show_points()
+		#pass
 		dog_player_reference.set_direction_points_array(points_of_directions_array)
 		#points_of_directions_array.clear()
 		#clear_line()
@@ -108,6 +162,7 @@ func share_position_array():
 func clear():
 	points_of_directions_array.clear()
 	$Line.clear_points()
+	limit = false
 
 # SIGNALS-----------------------------------------------------------------------
 

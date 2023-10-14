@@ -11,6 +11,7 @@ extends CharacterBody2D
 # BOOLEANS----------------------------------------------------------------------
 var in_movement = false
 var next_point_distance = false
+var to_last_point = false
 var aux_int = 0
 # INTEGERS ---------------------------------------------------------------------
 var speed = 200
@@ -65,7 +66,8 @@ func change_next_position():
 
 func verify_distances():
 		var distance: Vector2 = self.global_position - next_point
-		if distance.abs() <= Vector2(2,2):
+		distance = fix_distance(distance)
+		if distance.x <= 2 and distance.y <= 2:
 			aux_int += 1
 			if aux_int >= points_of_directions.size():
 				finalize_line_path()
@@ -73,9 +75,23 @@ func verify_distances():
 			return(true)
 		else:
 			return(false)
+			
 
 
-
+func fix_distance(aux_vector: Vector2):
+	var fixed_distance: Vector2
+	fixed_distance = aux_vector
+	if aux_vector.x < 0:
+		fixed_distance.x *= -1
+	else:
+		pass
+	
+	if aux_vector.y < 0:
+		fixed_distance.y *= -1
+	else:
+		pass
+	
+	return(fixed_distance)
 func set_direction_points_array(aux_array_points: Array):
 	points_of_directions = aux_array_points
 	start_line_path()

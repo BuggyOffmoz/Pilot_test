@@ -8,3 +8,8 @@ script = ExtResource("1_4bhf6")
 [node name="Line" type="Line2D" parent="."]
 width = 5.0
 default_color = Color(1, 0, 0, 1)
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 11.0
+offset_bottom = 10.0
+pivot_offset = Vector2(5, 5)
