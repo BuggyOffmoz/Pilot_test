@@ -6,8 +6,8 @@
 [node name="TestSecene" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 1926.0
+offset_bottom = 1086.0
 color = Color(0, 0.4, 0.0235294, 1)
 
 [node name="Draw_Line" parent="." node_paths=PackedStringArray("dog_player_reference") instance=ExtResource("1_3s3mb")]

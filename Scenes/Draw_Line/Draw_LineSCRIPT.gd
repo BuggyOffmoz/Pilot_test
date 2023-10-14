@@ -152,7 +152,7 @@ func show_points():
 
 func share_position_array():
 	if finish_draw == true and is_draw == false:
-		show_points()
+		#show_points()
 		#pass
 		dog_player_reference.set_direction_points_array(points_of_directions_array)
 		#points_of_directions_array.clear()
