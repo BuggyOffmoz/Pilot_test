@@ -1,3 +1,18 @@
-[gd_scene format=3 uid="uid://dcikyo2l8nsmr"]
+[gd_scene load_steps=3 format=3 uid="uid://dcikyo2l8nsmr"]
+
+[ext_resource type="PackedScene" uid="uid://yhl7mn2xhpiu" path="res://Scenes/Draw_Line/Draw_Line.tscn" id="1_3s3mb"]
+[ext_resource type="PackedScene" uid="uid://c31dif3pn0jon" path="res://Scenes/Player/BasicDog.tscn" id="2_e6vmm"]
 
 [node name="TestSecene" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0.4, 0.0235294, 1)
+
+[node name="Draw_Line" parent="." node_paths=PackedStringArray("dog_player_reference") instance=ExtResource("1_3s3mb")]
+dog_player_reference = NodePath("../BasicDog")
+
+[node name="BasicDog" parent="." node_paths=PackedStringArray("draw_line_reference") instance=ExtResource("2_e6vmm")]
+position = Vector2(444, 375)
+draw_line_reference = NodePath("../Draw_Line")
