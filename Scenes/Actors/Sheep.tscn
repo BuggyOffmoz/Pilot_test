@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3ulqy3mgrbem"]
+
+[ext_resource type="Script" path="res://Scenes/Components/StateMachine/StateManager.gd" id="1_l033i"]
+[ext_resource type="Script" path="res://Scenes/Actors/Sheep.gd" id="1_ouksv"]
+[ext_resource type="Texture2D" uid="uid://drpfqyi3p4dj4" path="res://Assets/Actors/Sheeps/128.png" id="1_ubvtr"]
+[ext_resource type="Script" path="res://Scenes/Components/AI/States/AI_Idle.gd" id="2_f4i5h"]
+[ext_resource type="Script" path="res://Scenes/Components/AI/States/AI_Dead.gd" id="3_8g4ke"]
+[ext_resource type="PackedScene" uid="uid://bewhuoytc41r1" path="res://Scenes/Components/AI/States/FlockState.tscn" id="5_3qhhj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdami"]
+radius = 32.3883
+
+[node name="Sheep" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_ouksv")
+
+[node name="StateManager" type="Node2D" parent="." node_paths=PackedStringArray("actor", "currentState")]
+script = ExtResource("1_l033i")
+actor = NodePath("..")
+currentState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource("2_f4i5h")
+
+[node name="FlockState" parent="StateManager" instance=ExtResource("5_3qhhj")]
+view_distance = 150.0
+avoid_distance = 70.0
+
+[node name="Dead" type="Node" parent="StateManager"]
+script = ExtResource("3_8g4ke")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ubvtr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jdami")
+
+[editable path="StateManager/FlockState"]

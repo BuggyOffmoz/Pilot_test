@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c31dif3pn0jon"]
 
-[ext_resource type="Script" path="res://Scenes/Player/BasicDogSCRIPT.gd" id="1_xcfx3"]
+[ext_resource type="Script" path="res://Scenes/Actors/Player/BasicDogSCRIPT.gd" id="1_xcfx3"]
 
 [node name="BasicDog" type="CharacterBody2D"]
 script = ExtResource("1_xcfx3")

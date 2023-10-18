@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0txsi8tn7x2d"]
+
+[ext_resource type="PackedScene" uid="uid://d3ulqy3mgrbem" path="res://Scenes/Actors/Sheep.tscn" id="1_rioyp"]
+[ext_resource type="Script" path="res://Scenes/Actors/Player/Player.gd" id="2_qjp50"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4c7ct"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4xy38"]
+radius = 351.172
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("2_qjp50")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_4c7ct")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("CircleShape2D_4xy38")
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Sheep" parent="Actors" instance=ExtResource("1_rioyp")]
+position = Vector2(980, 478)
+
+[node name="Sheep2" parent="Actors" instance=ExtResource("1_rioyp")]
+position = Vector2(823, 383)
+
+[node name="Sheep3" parent="Actors" instance=ExtResource("1_rioyp")]
+position = Vector2(1125, 328)
+
+[node name="Sheep4" parent="Actors" instance=ExtResource("1_rioyp")]
+position = Vector2(1256, 806)
+
+[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_exited"]

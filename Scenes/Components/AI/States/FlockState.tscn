@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bewhuoytc41r1"]
+
+[ext_resource type="Script" path="res://Scenes/Components/AI/States/FlockState.gd" id="1_k6wyj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6yq5o"]
+radius = 64.0078
+
+[node name="FlockState" type="Node2D"]
+script = ExtResource("1_k6wyj")
+view_distance = 60.0
+avoid_distance = 30.0
+
+[node name="FlockView" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlockView"]
+shape = SubResource("CircleShape2D_6yq5o")
+
+[connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
+[connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
