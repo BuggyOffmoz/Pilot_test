@@ -67,14 +67,10 @@ func try_create_point():
 	var last_point_position = points_of_directions_array.size() - 1
 	var mouse_position = get_global_mouse_position()
 	if points_of_directions_array.is_empty():
-		points_of_directions_array.insert(0,get_global_mouse_position())
+		points_of_directions_array.insert(0,mouse_position)
 		asign_first_point_line()
 	else:
 		distance = points_of_directions_array[last_point_position] - mouse_position
-#		distanceX = points_of_directions_array[last_point_position].x - mouse_position.x
-#		distanceX = abs(distanceX)
-#		distanceY = points_of_directions_array[last_point_position].y - mouse_position.y
-#		distanceY = abs(distanceY)
 		verify_amount_of_points()
 		verify_distance()
 		
@@ -86,42 +82,14 @@ func verify_amount_of_points():
 	else:
 		pass
 
-func verify_distance():
-	distance = fix_distance(distance)
-#	var mouse_velocity_fixed = fix_distance(Input.get_last_mouse_velocity())
 
-	
-#	if mouse_velocity_fixed.x >= 500 and limit == false:
-#		create_new_point(last_correct_mouse_position)
-#	elif mouse_velocity_fixed.x < 500 and limit == false:
-#		last_correct_mouse_position = get_global_mouse_position()
-	
-	
-#	if mouse_velocity_fixed.y >= 500 and limit == false:
-#		create_new_point(last_correct_mouse_position)
-#	elif mouse_velocity_fixed.y < 500 and limit == false:
-#		last_correct_mouse_position = get_global_mouse_position()
+func verify_distance():
+	distance = Tool.return_positive_vector(distance)
 	
 	if distance.x >= 15 and limit == false:
 		create_new_point()
 	elif distance.y >= 15 and limit == false:
 		create_new_point()
-
-
-func fix_distance(aux_vector: Vector2):
-	var fixed_distance: Vector2
-	fixed_distance = aux_vector
-	if aux_vector.x < 0:
-		fixed_distance.x *= -1
-	else:
-		pass
-	
-	if aux_vector.y < 0:
-		fixed_distance.y *= -1
-	else:
-		pass
-	
-	return(fixed_distance)
 
 
 func create_new_point():
@@ -147,20 +115,26 @@ func show_points():
 	for x in points_of_directions_array:
 		var new_point = $Panel.duplicate()
 		new_point.global_position = x
+		new_point.visible = true
+		new_point.add_to_group("extra_points")
 		self.add_child(new_point)
 
 
 func share_position_array():
 	if finish_draw == true and is_draw == false:
-		#show_points()
-		#pass
+		
+		# Dejar esta func ref si quieres ver todos los puntos de la linea-
+		show_points()
+		
 		dog_player_reference.set_direction_points_array(points_of_directions_array)
-		#points_of_directions_array.clear()
-		#clear_line()
-	
+
 
 func clear():
 	points_of_directions_array.clear()
+	var eliminated_array: Array[Node]
+	eliminated_array = get_tree().get_nodes_in_group("extra_points")
+	for x in eliminated_array:
+		x.queue_free()
 	$Line.clear_points()
 	limit = false
 
