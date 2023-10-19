@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://1dscyjhqnwgp"]
+[gd_scene load_steps=6 format=3 uid="uid://1dscyjhqnwgp"]
 
 [ext_resource type="Script" path="res://Scenes/World_Objects/Corrals/CorralsObjectSCRIPT.gd" id="1_ogpf1"]
 [ext_resource type="Script" path="res://Scenes/Components/SheepDetector/SheepDetectorComponentSCRIPT.gd" id="2_ypu85"]
@@ -8,6 +8,9 @@ size = Vector2(76, 263)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5xcba"]
 bg_color = Color(0.137255, 0.0235294, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4t80"]
+size = Vector2(538, 477)
 
 [node name="CorralsObject" type="Node2D"]
 script = ExtResource("1_ogpf1")
@@ -58,6 +61,16 @@ wait_time = 0.5
 autostart = true
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="TimersManager/Timer"]
+
+[node name="AreaManager" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="AreaManager"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaManager/StaticBody2D"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_c4t80")
 
 [connection signal="body_entered" from="SheepDetectorComponent" to="SheepDetectorComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="SheepDetectorComponent" to="SheepDetectorComponent" method="_on_body_exited"]
