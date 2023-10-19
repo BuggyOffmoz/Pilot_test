@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3ulqy3mgrbem"]
+[gd_scene load_steps=9 format=3 uid="uid://d3ulqy3mgrbem"]
 
 [ext_resource type="Script" path="res://Scenes/Components/StateMachine/StateManager.gd" id="1_l033i"]
 [ext_resource type="Script" path="res://Scenes/Actors/Sheep.gd" id="1_ouksv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/Components/AI/States/AI_Idle.gd" id="2_f4i5h"]
 [ext_resource type="Script" path="res://Scenes/Components/AI/States/AI_Dead.gd" id="3_8g4ke"]
 [ext_resource type="PackedScene" uid="uid://bewhuoytc41r1" path="res://Scenes/Components/AI/States/FlockState.tscn" id="5_3qhhj"]
+[ext_resource type="Script" path="res://Scenes/Actors/AnimationManager.gd" id="6_2m582"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdami"]
 radius = 32.3883
@@ -30,7 +31,11 @@ avoid_distance = 70.0
 [node name="Dead" type="Node" parent="StateManager"]
 script = ExtResource("3_8g4ke")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimationManager" type="Node2D" parent="." node_paths=PackedStringArray("sheep_parent")]
+script = ExtResource("6_2m582")
+sheep_parent = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimationManager"]
 texture = ExtResource("1_ubvtr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

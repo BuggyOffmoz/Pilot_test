@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://1dscyjhqnwgp"]
+
+[ext_resource type="Script" path="res://Scenes/World_Objects/Corrals/CorralsObjectSCRIPT.gd" id="1_ogpf1"]
+[ext_resource type="Script" path="res://Scenes/Components/SheepDetector/SheepDetectorComponentSCRIPT.gd" id="2_ypu85"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iesph"]
+size = Vector2(76, 263)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5xcba"]
+bg_color = Color(0.137255, 0.0235294, 0, 1)
+
+[node name="CorralsObject" type="Node2D"]
+script = ExtResource("1_ogpf1")
+
+[node name="SheepDetectorComponent" type="Area2D" parent="." node_paths=PackedStringArray("parent_reference")]
+position = Vector2(283, 0)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_ypu85")
+parent_reference = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepDetectorComponent"]
+position = Vector2(24, 0.5)
+shape = SubResource("RectangleShape2D_iesph")
+
+[node name="SpriteManager" type="Node2D" parent="."]
+
+[node name="Panel" type="Panel" parent="SpriteManager"]
+offset_left = -265.0
+offset_top = -237.0
+offset_right = 271.0
+offset_bottom = 239.0
+pivot_offset = Vector2(265, 238)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5xcba")
+
+[node name="SheepReq" type="Label" parent="SpriteManager"]
+self_modulate = Color(1, 1, 1, 0.12549)
+offset_left = -79.0
+offset_top = -195.0
+offset_right = 132.0
+offset_bottom = 183.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 275
+
+[node name="Specific" type="Label" parent="SpriteManager"]
+offset_left = 125.0
+offset_top = -231.0
+offset_right = 307.0
+offset_bottom = -132.0
+theme_override_font_sizes/font_size = 40
+
+[node name="TimersManager" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="TimersManager"]
+autostart = true
+
+[connection signal="body_entered" from="SheepDetectorComponent" to="SheepDetectorComponent" method="_on_body_entered"]
+[connection signal="body_exited" from="SheepDetectorComponent" to="SheepDetectorComponent" method="_on_body_exited"]
+[connection signal="timeout" from="TimersManager/Timer" to="." method="_on_timer_timeout"]

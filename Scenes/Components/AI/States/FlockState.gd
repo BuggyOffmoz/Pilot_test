@@ -53,6 +53,10 @@ func set_move(body):
 	stateManager.ChangeState("FlockState")
 
 
+
+
+
+
 func PhysicsUpdate(delta):
 	var mouse_vector = Vector2.ZERO
 	if _mouse_target != Vector2.ZERO and moveBody:
@@ -68,6 +72,8 @@ func PhysicsUpdate(delta):
 		var acceleration = cohesion_vector + align_vector + separation_vector + mouse_vector
 		player.velocity = player.velocity.move_toward(acceleration * max_speed, 2000 * delta).limit_length(max_speed)
 		
+		## if the sheep is moving, see where it is running.
+		animationManager.update_flip_h_direction_sprite(mouse_vector)
 	else:
 		var vectors = get_flock_status(_flock)
 		player.velocity = player.velocity.move_toward(Vector2.ZERO + (vectors[2] * separation_force), 200 * delta)

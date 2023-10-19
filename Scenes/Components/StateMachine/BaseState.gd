@@ -4,6 +4,8 @@ class_name BaseState
 
 var stateManager : StateManager
 var player : CharacterBody2D
+var animationManager : Node2D
+
 
 func Enter():
 	return null
