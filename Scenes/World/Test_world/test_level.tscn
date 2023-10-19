@@ -1,28 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0txsi8tn7x2d"]
+[gd_scene load_steps=4 format=3 uid="uid://d0txsi8tn7x2d"]
 
 [ext_resource type="PackedScene" uid="uid://d3ulqy3mgrbem" path="res://Scenes/Actors/Sheep.tscn" id="1_rioyp"]
-[ext_resource type="Script" path="res://Scenes/Actors/Player/Player.gd" id="2_qjp50"]
 [ext_resource type="PackedScene" uid="uid://1dscyjhqnwgp" path="res://Scenes/World_Objects/Corrals/CorralsObject.tscn" id="3_un57f"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4c7ct"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4xy38"]
-radius = 351.172
+[ext_resource type="PackedScene" uid="uid://b8j5r7px73e67" path="res://Scenes/Actors/Player/Dog.tscn" id="4_exfcs"]
 
 [node name="TestLevel" type="Node2D"]
-
-[node name="Player" type="CharacterBody2D" parent="."]
-script = ExtResource("2_qjp50")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CircleShape2D_4c7ct")
-
-[node name="Area2D" type="Area2D" parent="Player"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-shape = SubResource("CircleShape2D_4xy38")
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -54,12 +36,11 @@ type_of_sheep = "Black"
 position = Vector2(1019, 693)
 type_of_sheep = "White"
 
+[node name="Dog" parent="Actors" instance=ExtResource("4_exfcs")]
+
 [node name="WorldObjects" type="Node2D" parent="."]
 
 [node name="CorralsObject" parent="WorldObjects" instance=ExtResource("3_un57f")]
 position = Vector2(257, 578)
-specific_sheep_required = "White"
-sheep_amount_required = 2
-
-[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_exited"]
+specific_sheep_required = "Black"
+sheep_amount_required = 3

@@ -24,10 +24,12 @@ var moveBody = false
 var pushObject
 
 func Enter():
-	print("FLOCK ENTER STATE")
+	#print("FLOCK ENTER STATE")
+	pass
 	
 func Exit():
-	print("FLOCK EXIT STATE")
+	#print("FLOCK EXIT STATE")
+	pass
 
 
 func _ready():

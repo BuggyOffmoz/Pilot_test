@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8j5r7px73e67"]
+
+[ext_resource type="Texture2D" uid="uid://d3a3pofxtss5e" path="res://icon.svg" id="1_pqf6g"]
+[ext_resource type="Script" path="res://Scenes/Actors/Player/Dog.gd" id="1_ub7nt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4qg4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_76x1y"]
+radius = 400.0
+
+[node name="Dog" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_ub7nt")
+maxSpeed = 800.0
+acceleration = 4500.0
+friction = 3500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k4qg4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pqf6g")
+
+[node name="Areas" type="Node2D" parent="."]
+
+[node name="BarkingArea" type="Area2D" parent="Areas"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/BarkingArea"]
+shape = SubResource("CircleShape2D_76x1y")
+disabled = true
+
+[connection signal="body_entered" from="Areas/BarkingArea" to="." method="_on_barking_area_body_entered"]
+[connection signal="body_exited" from="Areas/BarkingArea" to="." method="_on_barking_area_body_exited"]
