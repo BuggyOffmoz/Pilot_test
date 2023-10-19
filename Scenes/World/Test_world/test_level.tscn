@@ -58,8 +58,8 @@ type_of_sheep = "White"
 
 [node name="CorralsObject" parent="WorldObjects" instance=ExtResource("3_un57f")]
 position = Vector2(257, 578)
-sheep_required = 2
-specific_sheep_required = "Black"
+specific_sheep_required = "White"
+sheep_amount_required = 2
 
 [connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_exited"]

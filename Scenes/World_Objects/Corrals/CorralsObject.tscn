@@ -54,7 +54,10 @@ theme_override_font_sizes/font_size = 40
 [node name="TimersManager" type="Node2D" parent="."]
 
 [node name="Timer" type="Timer" parent="TimersManager"]
+wait_time = 0.5
 autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="TimersManager/Timer"]
 
 [connection signal="body_entered" from="SheepDetectorComponent" to="SheepDetectorComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="SheepDetectorComponent" to="SheepDetectorComponent" method="_on_body_exited"]
