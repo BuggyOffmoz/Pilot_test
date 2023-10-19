@@ -10,8 +10,9 @@ extends WorldBaseObject
 var full = false
 
 # INTEGERS ---------------------------------------------------------------------
-@export var sheep_required: int = 0
 @export_enum("White","Black") var specific_sheep_required: String
+@export var sheep_amount_required: int = 0
+var specific_sheep_required_array: Array[String]
 var actual_sheeps_in: int = 0
 
 # ARRAYS------------------------------------------------------------------------
@@ -47,14 +48,13 @@ func try_put_sheep():
 
 
 func verify_amount_sheeps_in():
-	if actual_sheeps_in == sheep_required:
+	if actual_sheeps_in == sheep_amount_required:
 		full = true
 	update_visual_number()
 
 
 func update_visual_number():
-	$SpriteManager/SheepReq.text = str(sheep_required - actual_sheeps_in)
-
+	$SpriteManager/SheepReq.text = str(sheep_amount_required - actual_sheeps_in)
 func update_specifications():
 	$SpriteManager/Specific.text = specific_sheep_required
 # SIGNALS-----------------------------------------------------------------------
