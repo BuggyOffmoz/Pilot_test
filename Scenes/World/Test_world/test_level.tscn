@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0txsi8tn7x2d"]
+[gd_scene load_steps=6 format=3 uid="uid://d0txsi8tn7x2d"]
 
 [ext_resource type="PackedScene" uid="uid://d3ulqy3mgrbem" path="res://Scenes/Actors/Sheep.tscn" id="1_rioyp"]
 [ext_resource type="Script" path="res://Scenes/Actors/Player/Player.gd" id="2_qjp50"]
+[ext_resource type="PackedScene" uid="uid://1dscyjhqnwgp" path="res://Scenes/World_Objects/Corrals/CorralsObject.tscn" id="3_un57f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4c7ct"]
 
@@ -27,16 +28,38 @@ shape = SubResource("CircleShape2D_4xy38")
 y_sort_enabled = true
 
 [node name="Sheep" parent="Actors" instance=ExtResource("1_rioyp")]
-position = Vector2(980, 478)
+position = Vector2(1283, 616)
+type_of_sheep = "White"
 
 [node name="Sheep2" parent="Actors" instance=ExtResource("1_rioyp")]
-position = Vector2(823, 383)
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
+position = Vector2(1321, 441)
+type_of_sheep = "Black"
 
 [node name="Sheep3" parent="Actors" instance=ExtResource("1_rioyp")]
 position = Vector2(1125, 328)
+type_of_sheep = "White"
 
 [node name="Sheep4" parent="Actors" instance=ExtResource("1_rioyp")]
+modulate = Color(0.145098, 0.145098, 0.145098, 1)
 position = Vector2(1256, 806)
+type_of_sheep = "Black"
+
+[node name="Sheep5" parent="Actors" instance=ExtResource("1_rioyp")]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
+position = Vector2(989, 494)
+type_of_sheep = "Black"
+
+[node name="Sheep6" parent="Actors" instance=ExtResource("1_rioyp")]
+position = Vector2(1019, 693)
+type_of_sheep = "White"
+
+[node name="WorldObjects" type="Node2D" parent="."]
+
+[node name="CorralsObject" parent="WorldObjects" instance=ExtResource("3_un57f")]
+position = Vector2(257, 578)
+sheep_required = 2
+specific_sheep_required = "Black"
 
 [connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_exited"]

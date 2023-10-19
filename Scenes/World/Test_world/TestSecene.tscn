@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcikyo2l8nsmr"]
 
 [ext_resource type="PackedScene" uid="uid://yhl7mn2xhpiu" path="res://Scenes/Draw_Line/Draw_Line.tscn" id="1_3s3mb"]
-[ext_resource type="PackedScene" uid="uid://c31dif3pn0jon" path="res://Scenes/Player/BasicDog.tscn" id="2_e6vmm"]
+[ext_resource type="PackedScene" uid="uid://c31dif3pn0jon" path="res://Scenes/Actors/Player/BasicDog.tscn" id="2_e6vmm"]
 
 [node name="TestSecene" type="Node2D"]
 
